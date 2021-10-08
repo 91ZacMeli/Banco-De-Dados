@@ -29,7 +29,7 @@ public class AnuncioService {
     }
 
     public void salva(Anuncio anuncio){
-        if(anuncio.getCodigo()==null || anuncio.getCodigo().isEmpty()){
+        if(anuncio.getCodigo() ==null || anuncio.getCodigo().isEmpty()){
             anuncio.setCodigo((codigoUnico()));
             anunciosPersistence.insere(anuncio);
         }else {

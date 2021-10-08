@@ -23,7 +23,7 @@ public class VendedorPersistence {
 	public Vendedor get(String codigo) {
 
 		try {
-			PreparedStatement ps = cnx.prepareStatement("select * from Vendedor where codigo = ?");
+			PreparedStatement ps = cnx.prepareStatement("select * from vendedores where codigo = ?");
 			ps.setString(1, codigo);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
@@ -38,7 +38,7 @@ public class VendedorPersistence {
 	public List<Vendedor> lista(){
 		List<Vendedor> vendedores = new ArrayList<Vendedor>();
 		try {
-			PreparedStatement ps = cnx.prepareStatement("select * from Vendedor");
+			PreparedStatement ps = cnx.prepareStatement("select * from vendedores");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				vendedores.add(new Vendedor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
@@ -52,7 +52,7 @@ public class VendedorPersistence {
 	public void insere(Vendedor vendedor) {
 		try {
 			Connection cnx = BancoDeDados.getConection();
-			PreparedStatement ps = cnx.prepareStatement("insert into Vendedor (codigo, cpf, nome, endereco, uf, cidade)"
+			PreparedStatement ps = cnx.prepareStatement("insert into vendedores (codigo, cpf, nome, endereco, uf, cidade)"
 					+ " values (?,?,?,?,?,?)");
 			ps.setString(1, vendedor.getCodigo());
 			ps.setString(2, vendedor.getCpf());
@@ -69,7 +69,7 @@ public class VendedorPersistence {
 
 	public void atualiza(Vendedor vendedor) {
 		try {
-			PreparedStatement ps = cnx.prepareStatement("update Vendedor set cpf = ?, nome = ?, endereco = ?, uf = ?, cidade = ? where codigo = ?");
+			PreparedStatement ps = cnx.prepareStatement("update vendedores set cpf = ?, nome = ?, endereco = ?, uf = ?, cidade = ? where codigo = ?");
 			ps.setString(1, vendedor.getCpf());
 			ps.setString(2, vendedor.getNome());
 			ps.setString(3, vendedor.getEndereco());
@@ -84,7 +84,7 @@ public class VendedorPersistence {
 
 	public void exclui(String codigo) {
 		try {
-			PreparedStatement ps = cnx.prepareStatement("delete from Vendedor where codigo = ?");
+			PreparedStatement ps = cnx.prepareStatement("delete from vendedores where codigo = ?");
 			ps.setString(1, codigo);
 			ps.execute();
 		} catch (SQLException e) {
